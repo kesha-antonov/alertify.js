@@ -93,7 +93,7 @@
 
 .alertify-logs {
   position: fixed;
-  z-index: 100; }
+  z-index: 99999; }
   .alertify-logs.bottom, .alertify-logs:not(.top) {
     bottom: 16px; }
   .alertify-logs.left, .alertify-logs:not(.right) {
