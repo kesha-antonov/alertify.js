@@ -141,12 +141,15 @@
              *
              * @return {Object}
              */
-            dialog: function(message, type, onOkay, onCancel) {
+            dialog: function(message, type, onOkay, onCancel, validatePromptValue) {
+                validatePromptValue = validatePromptValue || false;
+                
                 return this.setup({
                     type: type,
                     message: message,
                     onOkay: onOkay,
-                    onCancel: onCancel
+                    onCancel: onCancel,
+                    validatePromptValue: validatePromptValue
                 });
             },
 
@@ -273,6 +276,13 @@
 
                     if (btnOK) {
                         btnOK.addEventListener("click", function(ev) {
+                            
+                            if (item.type == "prompt" && 'function' === typeof item.validatePromptValue) {
+                                if(item.validatePromptValue(input.value) == false) {
+                                    return false;
+                                }
+                            }
+                            
                             if (item.onOkay && "function" === typeof item.onOkay) {
                                 if (input) {
                                     item.onOkay(input.value, ev);
@@ -440,8 +450,8 @@
             confirm: function(message, onOkay, onCancel) {
                 return _alertify.dialog(message, "confirm", onOkay, onCancel) || this;
             },
-            prompt: function(message, onOkay, onCancel) {
-                return _alertify.dialog(message, "prompt", onOkay, onCancel) || this;
+            prompt: function(message, onOkay, onCancel, validatePromptValue) {
+                return _alertify.dialog(message, "prompt", onOkay, onCancel, validatePromptValue) || this;
             },
             log: function(message, click) {
                 _alertify.log(message, "default", click);
