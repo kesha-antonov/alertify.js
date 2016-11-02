@@ -96,14 +96,14 @@
                     html += this.dialogs.input.replace("type='text'", "type='password'");
                 }
 
-                if (item.type == 'select') {
+                if (item.type == "select") {
                     var select = this.dialogs.select;
 
                     for(var key in item.selectOptions) {
-                        select += '<option value="' + key + '">' + item.selectOptions[key] + '</option>';
+                        select += "<option value=\"" + key + "\">" + item.selectOptions[key] + "</option>";
                     }
 
-                    select += '</select>';
+                    select += "</select>";
                     html += select;
                 }
 
